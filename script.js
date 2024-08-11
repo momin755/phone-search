@@ -1,4 +1,4 @@
-
+document.body.style.backgroundColor='#191030'
 const searchPhone = () =>{
     const searchText = document.getElementById('searchText')
     const searchValue = searchText.value
@@ -6,14 +6,21 @@ const searchPhone = () =>{
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchValue}`
     fetch(url)
     .then(res => res.json())
-    .then(data => showPhone(data.data))
+    .then(data =>{ console.log(data.data == null)  
+    if(data.data == null){
+      document.getElementById('spinner').style.display = 'block'
+    }else{
+      showPhone(data.data)
+      document.getElementById('spinner').style.display = 'none'
+    }
+  })
+  searchText.value=""
+  const phoneContainer = document.getElementById('showDisplay')
+  phoneContainer.innerHTML =""
+   const showFullDetails = document.getElementById('showDetails')
+  showFullDetails.innerHTML =""
+
     
-    document.getElementById('spinner').style.display = 'none'
-    searchText.value=""
-    const phoneContainer = document.getElementById('showDisplay')
-    phoneContainer.innerHTML =""
-     const showFullDetails = document.getElementById('showDetails')
-    showFullDetails.innerHTML =""
 }
 
 const showPhone = phones =>{
@@ -41,10 +48,18 @@ const showDetails = phoneId =>{
    
     fetch(url)
     .then(res => res.json())
-    .then(data => showData(data.data))
+    .then(data =>{ console.log(data.data == null)
+      if(data.data == null){
+         document.getElementById('spinner').style.display = 'block'
+      }
+      else{
+        showData(data.data)
+        document.getElementById('spinner').style.display = 'none'
+      }
+    })
     const showFullDetails = document.getElementById('showDetails')
     showFullDetails.innerHTML =""
-    document.getElementById('spinner').style.display = 'none'
+   
 
 }
 const showData =(fullData)=>{
