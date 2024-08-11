@@ -1,0 +1,9 @@
+#showDetails{
+    width: 40%;
+}
+
+#spinner{
+    display: none;
+    width: 10%;
+    margin: 0 auto;
+}
